@@ -15,22 +15,58 @@ struct ListNode {
 };
 
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-    ListNode* result;
-    ListNode* r ;
-    r = result;
-    int c = 0;
-    while(l1 !=NULL && l2!=NULL)
+    if(l1 == NULL && l2 == NULL)
     {
-        int temp = l1->val+ l2->val + c ;
-        c = temp / 10;
-        ListNode* tempNode = new ListNode(temp<10?temp:temp%10);
-        r->next = tempNode;
-        l1 = l1->next;
-        l2 = l2->next;
-        r = r->next;
+        return NULL;
     }
-    r->next = NULL;
-    return result->next;
+    if(l1 == NULL)
+    {
+        return l2;
+    }
+    if(l2 == NULL)
+    {
+        return l1;
+    }
+    int carry = 0;
+    int temp = 0;
+    ListNode* result = NULL;
+    ListNode* cur = NULL;
+    while(l1 != NULL || l2 != NULL)
+    {
+        if(l1 == NULL)
+        {
+            temp = 0 + l2->val + carry;
+            l2 = l2 ->next;
+        }
+        else if(l2 == NULL)
+        {
+            temp = l1->val + 0 + carry;
+            l1 = l1->next;
+        }
+        else
+        {
+            temp = l1->val + l2->val + carry;
+            l1 = l1->next;
+            l2 = l2->next;
+        }
+        carry = temp / 10;
+        ListNode* tempNode = new ListNode(temp % 10);
+        if(result == NULL)
+        {
+            result = tempNode;
+            cur = tempNode;
+        }
+        else
+        {
+            cur->next = tempNode;
+            cur = cur->next;
+        }
+    }
+    if(carry != 0)
+    {
+        cur->next = new ListNode(carry);
+    }
+return result; 
 }
 int main()
 {
