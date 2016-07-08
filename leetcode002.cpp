@@ -1,9 +1,9 @@
 /*************************************************************************
-	> File Name: leetcode002.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Wed 06 Jul 2016 10:41:58 PM PDT
- ************************************************************************/
+> File Name: leetcode002.cpp
+> Author: 
+> Mail: 
+> Created Time: Wed 06 Jul 2016 10:41:58 PM PDT
+************************************************************************/
 
 #include<iostream>
 using namespace std;
@@ -13,7 +13,9 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-
+//思路：两个链表只要有一个为NULL另一个即为结果
+//如果两个链表不等长则将较短的链表用0补齐
+//将计算结果采用尾插法建立结果链表，如果最后一位计算结果有进位则再创建一个节点
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     if(l1 == NULL && l2 == NULL)
     {
@@ -66,7 +68,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     {
         cur->next = new ListNode(carry);
     }
-return result; 
+    return result; 
 }
 int main()
 {
