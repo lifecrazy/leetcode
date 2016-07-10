@@ -34,34 +34,40 @@ int removeDuplicates(vector<int>& nums) {
                 j++;
                 if(nums[i] != nums[j])
                 {
-                    nums[i+1] = nums[j];
-                    i++;
+                    nums[++i] = nums[j];
+                    i--;
                     break;
                 }
             }
         }
     }
-    return i;
+    for(int k = 0 ; k < i+1 ;k++)
+    {
+        cout << nums[k] << "\t";
+    }
+    cout << endl;
+    return i+1;
 }
 
 int main()
 {
     vector<int> data;
     data.push_back(1);
+    data.push_back(2);
+   /* data.push_back(1);
     data.push_back(1);
     data.push_back(1);
-    data.push_back(1);
-    data.push_back(1);
     data.push_back(2);
     data.push_back(2);
     data.push_back(2);
     data.push_back(2);
     data.push_back(2);
     data.push_back(2);
-    data.push_back(3);
-    data.push_back(3);
-    data.push_back(3);
-    data.push_back(3);
-    data.push_back(3);
-    cout << removeDuplicates(data) << endl;;
+    data.push_back(3);*/
+    cout << removeDuplicates(data) << endl;
+    for(int i = 0 ; i < data.size(); i++)
+    {
+        cout << data[i] << "\t";
+    }
+    cout << endl;
 }
