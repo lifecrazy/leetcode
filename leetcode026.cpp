@@ -16,32 +16,20 @@ using namespace std;
 int removeDuplicates(vector<int>& nums) {
     if(nums.size() <= 1)
     {
-        return nums.size();
+        return nums.size();    
     }
-    int i = 0 ;
-    int j = 1;
-    while(j < nums.size())
+    int i = 1;
+    int cur = 0;
+    while (i <nums.size())
     {
-        if(nums[i] != nums[j])
+        if (nums[i] != nums[cur])
         {
-            i++;
-            j++;
+            cur++;
+            nums[cur] = nums[i];   
         }
-        else
-        {
-            while(j < nums.size())
-            {
-                j++;
-                if(nums[i] != nums[j])
-                {
-                    nums[++i] = nums[j];
-                    i--;
-                    break;
-                }
-            }
-        }
+        i++;
     }
-    return i+1;
+    return cur+1;
 }
 
 int main()
@@ -58,5 +46,6 @@ int main()
     data.push_back(2);
     data.push_back(2);
     data.push_back(3);
+    data.push_back(4);
     cout << removeDuplicates(data) << endl;
 }
