@@ -12,7 +12,7 @@ using namespace std;
 
 int search(vector<int>& nums, int target) {
     int low = 0 ;
-    int high = nums.size() - 1;
+    int high = nums.size();
     int mid ;
     while(low < high)
     {
@@ -32,7 +32,7 @@ int search(vector<int>& nums, int target) {
         }
         else
         {
-            if(nums[mid] < target && target < nums[high])
+            if(nums[mid] < target && target < nums[high - 1])
             {
                 low = mid + 1;
             }
