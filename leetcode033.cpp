@@ -32,7 +32,7 @@ int search(vector<int>& nums, int target) {
         }
         else
         {
-            if(nums[mid] < target && target < nums[high - 1])
+            if(nums[mid] < target && target <= nums[high - 1])
             {
                 low = mid + 1;
             }
@@ -48,14 +48,15 @@ int search(vector<int>& nums, int target) {
 int main()
 {
     vector<int> data;
-    data.push_back(4);
+ //   data.push_back(4);
     data.push_back(5);
-    data.push_back(6);
-    data.push_back(7);
-    data.push_back(0);
+   // data.push_back(6);
+   // data.push_back(7);
+  //  data.push_back(0);
     data.push_back(1);
-    data.push_back(2);
+  //  data.push_back(2);
     data.push_back(3);
     cout <<search(data,1)<< endl;
     cout <<search(data,5)<<endl;
+    cout <<search(data,3)<<endl;
 }
