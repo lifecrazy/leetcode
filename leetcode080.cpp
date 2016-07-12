@@ -9,37 +9,22 @@
 #include<vector>
 using namespace std;
 int removeDuplicates(vector<int>& nums) {
-    if(nums.size() <= 1)
+    if(nums.size() <= 2)
     {
         return nums.size();
     }
-    int i = 0 ;
-    int cur = 1;
-    int count = 0;
-    while(cur < nums.size())
+    int i = 2 ;
+    int cur = 2;
+    while(i < nums.size())
     {
-        if(nums[i] != nums[cur])
+        if(nums[i] != nums[cur - 2])
         {
-            if(count < 2)
-            {
-                i++;
-            }
-            else
-            {
-                i +=2;
-            }
-            nums[i] = nums[cur];
-            count = 0;
+            nums[cur] = nums[i];
+            cur++;
         }
-        cur++;
-        count++;
+        i++;
     }
-    for(int j = 0 ; j < i + 1;j++)
-    {
-        cout << nums[j] <<"\t";
-    }
-    cout << endl;
-    return i + 1;
+    return cur;
 }
 
 int main()
@@ -48,8 +33,8 @@ int main()
     data.push_back(1);
     data.push_back(1);
     data.push_back(1);
-    data.push_back(2);
-    data.push_back(2);
-    data.push_back(3);
+   // data.push_back(2);
+   // data.push_back(2);
+   // data.push_back(3);
     cout << removeDuplicates(data)<<endl;
 }
