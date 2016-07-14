@@ -12,6 +12,10 @@ using namespace std;
 //      2.确定计算公式 A[i][j] = A[i - 1][j - 1] + A[i - 1][j]
 vector< vector<int> > generate(int numRows) {
     vector<vector<int> > result;
+    if(numRows == 0)
+    {
+        return result;
+    }
     vector<int> firstRow;
     firstRow.push_back(1);
     if(numRows == 1)
@@ -45,14 +49,6 @@ vector< vector<int> > generate(int numRows) {
         result.push_back(row);
         i++;
         j = 1;
-    }
-    for(int m = 0; m < result.size();m++)
-    {
-        for(int n = 0 ; n <result[m].size();n++)
-        {
-            cout << result[m][n] << "\t";
-        }
-        cout << endl;
     }
     return result;
 }
