@@ -39,15 +39,16 @@ vector<int> twoSum_2(vector<int>& nums, int target) {
     size_t len = nums.size();
     for(size_t i = 0; i < len ; i++)
     {
-        mapData.insert(pair<int,int>(i,nums[i]));
+        mapData.insert(pair<int,int>(nums[i],i));
     }
+    map<int,int>::iterator iter;
     for(size_t i = 0;i < len ; i++)
     {
-        int temp = target - nums[1];
-        if(mapData.find(temp)!= mapData.end())
+        int temp = target - nums[i];
+        if(mapData.find(temp)!= mapData.end() && mapData[temp] > i)
         {
             results.push_back(i);
-            results.push_back(mapData.find(temp)->first);
+            results.push_back(mapData[temp]);
             return results;
         }
     }
@@ -60,7 +61,7 @@ int main()
     inputs.push_back(7);
     inputs.push_back(11);
     inputs.push_back(15);
-    int target = 9;
+    int target = 22;
     cout << "twoSum results" << endl;
     vector<int> results  = twoSum(inputs,target);
     for(size_t i = 0 ; i < results.size();i++)
