@@ -31,6 +31,7 @@ ListNode* reverseList(ListNode* head) {
         }
         pCur = pNext;
     }
+    return pCur;
 }
 int main()
 {
