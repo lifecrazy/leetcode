@@ -26,6 +26,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
         pCur = pCur->next;
     }
     int i = 0;
+    //如果 题目要求没有说n 小于等于 链表的长度 需要进行判断
    /* int count = 0;
     ListNode* tempCount = head;
     while(tempCount != NULL)
@@ -47,6 +48,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
         pCur = pNext;
         i++;
     }
+    //如果从第一个结点开始逆置则pPre会导致pStartPre为NULL
     if(pStartPre == NULL)
     {
         head = pPre;
