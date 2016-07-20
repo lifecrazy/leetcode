@@ -26,7 +26,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
         pCur = pCur->next;
     }
     int i = 0;
-    int count = 0;
+   /* int count = 0;
     ListNode* tempCount = head;
     while(tempCount != NULL)
     {
@@ -36,7 +36,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
     if(n > count)
     {
         n = count;
-    }
+    }*/
     ListNode *pStartPre = pPre;
     ListNode *pEnd = pCur;
     while(i < n- m + 1)
@@ -44,16 +44,17 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
         ListNode* pNext = pCur->next;
         pCur->next = pPre;
         pPre = pCur;
-      /*  if(pNext == NULL)
-        {
-            pStartPre->next = pPre;
-            pEnd->next = pCur;
-            return head;
-        }*/
         pCur = pNext;
         i++;
     }
-    pStartPre->next = pPre;
+    if(pStartPre == NULL)
+    {
+        head = pPre;
+    }
+    else
+    {
+        pStartPre->next = pPre;
+    }
     pEnd->next = pCur;
     return head;
 }
@@ -76,7 +77,7 @@ int main()
         p = p->next;
     }
     cout << endl;
-    ListNode* results = reverseBetween(firstList,2,5000);
+    ListNode* results = reverseBetween(firstList,1,5);
     p = results;
     while(p != NULL)
     {
