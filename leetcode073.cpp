@@ -10,31 +10,25 @@
 using namespace std;
 //思路：记录值为0的行和列的值，然后遍历该行和该列将其赋值为0
 void setZeroes(vector<vector<int> >& matrix) {
-    vector<int> row;
-    vector<int> col;
+    vector<int> row(matrix.size());
+    vector<int> col(matrix[0].size());
     for(int i = 0 ;i < matrix.size();i++)
     {
         for(int j = 0 ; j < matrix[i].size();j++)
         {
             if(0 == matrix[i][j])
             {
-                row.push_back(i);
-                col.push_back(j);
+                row[i] = 1;
+                col[j] = 1;
             }
         }
     }
     for(int i = 0; i < row.size();i++ )
     {
-        for(int j = 0; j < matrix[i].size();j++)
-        {
-            matrix[row[i]][j] = 0;
-        }
-    }
-    for(int i = 0; i < matrix.size();i++ )
-    {
         for(int j = 0; j < col.size();j++)
         {
-            matrix[i][col[j]] = 0;
+            if(1 == row[i] || 1== col[j])
+            matrix[i][j] = 0;
         }
     }
 
@@ -43,8 +37,8 @@ void setZeroes(vector<vector<int> >& matrix) {
 int main()
 {
     vector<vector<int> > data;
-    int rowNum = 4;
-    int colNum = 5;
+    int rowNum = 5;
+    int colNum = 4;
     for(int i = 0 ; i < rowNum; i++)
     {
         vector<int > row;
@@ -54,8 +48,10 @@ int main()
         }
         data.push_back(row);
     }
-    data[3][2] = 0;
-    data[2][4] = 0;
+    data[0][0] = 0;
+    data[0][1] = 0;
+    data[0][2] = 0;
+    data[2][0] = 0;
     for(int i = 0 ; i < data.size();i++)
     {
         for(int j = 0 ; j <data[i].size();j++)
