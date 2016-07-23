@@ -13,28 +13,55 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-ListNode* rotateRight(ListNode* head,int k)
+//思路：设置两个指针让一个指针行走k步，
+//然后让两个指针同时向前行走直到第一个指针走到末尾
+//第二个指针所指的下一个结点即为要反转的结点的头结点
+//边界问题：当k 为链表的长度时直接返回该链表即为结果。
+ListNode* rotateRight(ListNode* head, int k)
 {
-    if(head == NULL || head->next == NULL)
+    if (head == NULL || head->next == NULL)
     {
-        return head;
+        return head;   
     }
     ListNode* pPre = head;
+    int count = 0;
+    while (pPre != NULL)
+    {
+        pPre = pPre->next;
+        count++;    
+    }
     ListNode* pCur = head;
-    for(int i = 0; i < k ; i++)
+    pPre = head;
+    for (int i = 0; i < k % count; i++)
     {
-        pPre = pPre->next;
+        pPre = pPre->next;    
     }
-    while(pPre->next != NULL)
+    /*这样的方法去找第k个节点当k很大的时候会超时
+    *  ListNode* pPre = head;
+    *  ListNode* pCur = head;
+    *  for (int i = 0; i < k ; i++)
+    *  {
+    *       if (pPre == NULL)
+    *       {
+    *           pPre = head;
+    *       }
+    *       pPre = pPre->next;
+    *  }*/
+    if (pPre != NULL)
     {
-        pPre = pPre->next;
-        pCur = pCur->next;
+        while (pPre->next != NULL)
+        {
+            pPre = pPre->next;
+            pCur = pCur->next;        
+        }
+        pPre->next = head;
+        head = pCur->next;
+        pCur->next = NULL;    
     }
-    pPre->next = head;
-    head = pCur->next;
-    pCur->next = NULL;
     return head;
 }
+
+
 /*ListNode* rotateRight(ListNode* head, int k) {
     if(head == NULL || head->next == NULL)
     {
@@ -98,7 +125,7 @@ int main()
         p = p->next;
     }
     cout << endl;
-    ListNode* results = rotateRight(firstList,2);
+    ListNode* results = rotateRight(firstList,5);
     p = results;
     while(p != NULL)
     {
