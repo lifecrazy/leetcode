@@ -13,7 +13,29 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-ListNode* rotateRight(ListNode* head, int k) {
+ListNode* rotateRight(ListNode* head,int k)
+{
+    if(head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    ListNode* pPre = head;
+    ListNode* pCur = head;
+    for(int i = 0; i < k ; i++)
+    {
+        pPre = pPre->next;
+    }
+    while(pPre->next != NULL)
+    {
+        pPre = pPre->next;
+        pCur = pCur->next;
+    }
+    pPre->next = head;
+    head = pCur->next;
+    pCur->next = NULL;
+    return head;
+}
+/*ListNode* rotateRight(ListNode* head, int k) {
     if(head == NULL || head->next == NULL)
     {
         return head;
@@ -57,7 +79,7 @@ ListNode* rotateRight(ListNode* head, int k) {
         i++;
     }
     return head;
-}
+}*/
 int main()
 {
     ListNode* firstList = new ListNode(2);
