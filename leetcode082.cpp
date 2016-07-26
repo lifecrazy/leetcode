@@ -14,7 +14,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 ListNode* deleteDuplicates(ListNode* head) {
-	//只有一个节点或者没有节点的情况
+    //只有一个节点或者没有节点的情况
 	if (head == NULL || head->next == NULL)
 	{
 		return head;
@@ -55,9 +55,7 @@ ListNode* deleteDuplicates(ListNode* head) {
 				}
 				count = 1;
 			}
-
 		}
-
 	}
 	if (count != 1)
 	{
@@ -68,7 +66,6 @@ ListNode* deleteDuplicates(ListNode* head) {
 		else {
 			pre->next = NULL;
 		}
-
 	}
 	return head;
 }
