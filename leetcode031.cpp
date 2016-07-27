@@ -1,9 +1,9 @@
 /*************************************************************************
-	> File Name: leetcode031.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Wed 27 Jul 2016 01:53:06 AM PDT
- ************************************************************************/
+> File Name: leetcode031.cpp
+> Author: 
+> Mail: 
+> Created Time: Wed 27 Jul 2016 01:53:06 AM PDT
+************************************************************************/
 
 #include<iostream>
 #include<vector>
@@ -34,22 +34,36 @@ void nextPermutation(vector<int>& nums) {
     nums[partitionNumber] = nums[changeNum];
     nums[changeNum] = temp;
     //逆序partitionNumber右边的数字
-    for(int i = partitionNumber + 1 ; i < partitionNumber + (nums.size()-1 - partitionNumber + 1)/2; i++)
+    //当partitionNumber和changeNum都为0表示已经排列到最后一个
+    if(partitionNumber == 0 && changeNum == 0)
     {
-        temp = nums[nums.size()-1-(i-partitionNumber - 1)];
-        nums[nums.size()-1-(i-partitionNumber - 1)] = nums[i];
-        nums[i] = temp;
+        for(int i = 0 ; i < nums.size()/2;i++)
+        {
+            temp = nums[i];
+            nums[i] = nums[nums.size() - 1 - i];
+            nums[nums.size() - 1 - i] = temp;
+        }
+    }
+    else
+    {
+        for(int i = partitionNumber + 1 ; i <= partitionNumber + (nums.size()-1 - partitionNumber + 1)/2; i++)
+        {
+            temp = nums[nums.size()-1-(i-partitionNumber - 1)];
+            nums[nums.size()-1-(i-partitionNumber - 1)] = nums[i];
+            nums[i] = temp;
+        }
+
     }
 }
 int main()
 {
     vector<int> data;
-    data.push_back(6);
-    data.push_back(8);
-    data.push_back(7);
-    data.push_back(4);
     data.push_back(3);
     data.push_back(2);
+    data.push_back(1);
+//    data.push_back(4);
+//    data.push_back(3);
+//    data.push_back(2);
     for(int i = 0; i < data.size();i++)
     {
         cout << data[i] << "\t";
