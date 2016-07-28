@@ -56,13 +56,17 @@ void nextPermutation(vector<int>& nums) {
 
     }
 }
+//方法一：超时
 string getPermutation(int n, int k) {
     vector<int> data;
+    int num = 1;
     for(int i = 1 ; i <= n ; i++)
     {
+        num *= i;
         data.push_back(i);
     }
-    for(int i = 0 ; i < k-1 ; i++)
+    k = k % num == 0 ?num -1 :k-1;
+    for(int i = 0 ; i < k  ; i++)
     {
         nextPermutation(data);
     }
@@ -93,6 +97,6 @@ int main()
         cout << data[i] << "\t";
     }
     cout << endl;
-     cout << getPermutation(3,2) << endl;
-    cout << getPermutation(3,9) << endl;
+     cout << getPermutation(2,2) << endl;
+    cout << getPermutation(8,8590) << endl;
 }
