@@ -8,6 +8,8 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<algorithm>
+#include<sstream>
 using namespace std;
 
 void nextPermutation(vector<int>& nums) {
@@ -86,17 +88,17 @@ void swap(int* a,int *b)
     *a = *b;
     *b = temp;
 }
-vector<vector<int> > tempResult;
+vector<int> tempResult;
 void perm(vector<int>& data,int begin,int end)
 {
     if(begin > end)
     {
-        vector<int> result;
+        int n = 0 ;
         for(int i = 0 ; i <= end ; i++)
         {
-            result.push_back(data[i]);
+            n = n * 10 + data[i];
         }
-        tempResult.push_back(result);
+        tempResult.push_back(n);
     }
     else
     {
@@ -117,44 +119,15 @@ string getPermutation_2(int n, int k) {
         data.push_back(i);
     }
     perm(data,0,data.size()-1);
-/*    for(int i = 0 ; i < num;i++)
-    {
-        cout<<i+1<<"---";
-        for(int j = 0 ; j < data.size();j++)
-        {
-            cout <<tempResult[i][j];
-        }
-        cout << endl;
-    }*/
-    string result = "";
+    sort(tempResult.begin(),tempResult.end());
 
-    for(int i = 0 ; i < n ; i++)
-    {
-        result+='0' + tempResult[k-1][i];
-    }
-    return result;
+    stringstream ss;
+    ss << tempResult[k-1];
+    return ss.str();
 }
 int main()
 {
-/*    vector<int> data;
-    data.push_back(3);
-    data.push_back(2);
-    data.push_back(1);
-//    data.push_back(4);
-//    data.push_back(3);
-//    data.push_back(2);
-    for(int i = 0; i < data.size();i++)
-    {
-        cout << data[i] << "\t";
-    }
-    cout << endl;
-    nextPermutation(data);
-    for(int i = 0; i < data.size();i++)
-    {
-        cout << data[i] << "\t";
-    }
-    cout << endl;*/
-     cout << getPermutation(3,3) << endl;
+    cout << getPermutation(3,5) << endl;
     cout << getPermutation(8,8590) << endl;
-    cout << getPermutation_2(3,3)<<endl;
+    cout << getPermutation_2(3,5)<<endl;
 }
