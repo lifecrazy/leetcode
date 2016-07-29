@@ -9,6 +9,7 @@
 #include<vector>
 #include<string>
 using namespace std;
+
 void nextPermutation(vector<int>& nums) {
     //找到第一个逆序数
     int partitionNumber = 0;
@@ -77,9 +78,65 @@ string getPermutation(int n, int k) {
     }
     return result;
 }
+//方法二 递归
+void swap(int* a,int *b)
+{
+    int temp;
+   temp = *a;
+    *a = *b;
+    *b = temp;
+}
+vector<vector<int> > tempResult;
+void perm(vector<int>& data,int begin,int end)
+{
+    if(begin > end)
+    {
+        vector<int> result;
+        for(int i = 0 ; i <= end ; i++)
+        {
+            result.push_back(data[i]);
+        }
+        tempResult.push_back(result);
+    }
+    else
+    {
+        for(int i = begin; i <= end ; i++)
+        {
+            swap(&data[begin],&data[i]);
+            perm(data,begin + 1,end);
+            swap(&data[begin],&data[i]);
+        }
+    }
+}
+string getPermutation_2(int n, int k) {
+    vector<int> data;
+    int num = 1;
+    for(int i = 1 ; i <= n ; i++)
+    {
+        num *= i;
+        data.push_back(i);
+    }
+    perm(data,0,data.size()-1);
+/*    for(int i = 0 ; i < num;i++)
+    {
+        cout<<i+1<<"---";
+        for(int j = 0 ; j < data.size();j++)
+        {
+            cout <<tempResult[i][j];
+        }
+        cout << endl;
+    }*/
+    string result = "";
+
+    for(int i = 0 ; i < n ; i++)
+    {
+        result+='0' + tempResult[k-1][i];
+    }
+    return result;
+}
 int main()
 {
-    vector<int> data;
+/*    vector<int> data;
     data.push_back(3);
     data.push_back(2);
     data.push_back(1);
@@ -96,7 +153,8 @@ int main()
     {
         cout << data[i] << "\t";
     }
-    cout << endl;
-     cout << getPermutation(2,2) << endl;
+    cout << endl;*/
+     cout << getPermutation(3,3) << endl;
     cout << getPermutation(8,8590) << endl;
+    cout << getPermutation_2(3,3)<<endl;
 }
