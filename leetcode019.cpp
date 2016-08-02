@@ -24,14 +24,21 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
         first = first->next;
     }
     ListNode* pCur = head;
-    ListNode* pPre = head;
+    ListNode* pPre = NULL;
     while(first != NULL)
     {
         first = first->next;
         pPre = pCur;
         pCur = pCur->next;
     }
-    pPre->next = pCur->next;
+    if(pPre == NULL)
+    {
+        head = pCur->next;    
+    }
+    else
+    {
+        pPre->next = pCur->next;
+    }
     return head;
 }
 int main()
