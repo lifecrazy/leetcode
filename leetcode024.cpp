@@ -21,23 +21,17 @@ ListNode* swapPairs(ListNode* head) {
     int temp = 0;
     ListNode* pCur = head;
     ListNode* pNext = head->next;
-    while(pNext->next != NULL)
+    while(pNext != NULL)
     {
         temp = pCur->val;
         pCur->val = pNext->val;
         pNext->val = temp;
         pCur = pNext->next;
-        if(pCur->next ==NULL)
+        if(pCur == NULL)
         {
             return head;
         }
         pNext = pCur->next;
-    }
-    if(pNext == head->next)
-    {
-        temp = head->val;
-        head->val = head->next->val;
-        head->next->val = temp;
     }
     return head;
 }
@@ -46,9 +40,9 @@ int main()
     ListNode* firstList = new ListNode(1);
     ListNode* nodeOne = new ListNode(2);
     firstList->next = nodeOne;
-    ListNode* nodeTwo = new ListNode(3);
+/*    ListNode* nodeTwo = new ListNode(3);
     nodeOne->next = nodeTwo;
-/*    ListNode* secondList = new ListNode(4);
+    ListNode* secondList = new ListNode(4);
     nodeTwo->next = secondList;
     ListNode* nodeThree = new ListNode(5);
     secondList->next = nodeThree;
