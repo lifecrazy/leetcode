@@ -14,7 +14,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 ListNode* reverseKGroup(ListNode* head, int k) {
-    if(head == NULL && k <= 0)
+    if(head == NULL || k <= 1)
     {
         return head;
     }
@@ -33,6 +33,7 @@ ListNode* reverseKGroup(ListNode* head, int k) {
     int i = 1;
     while(j < (len/k))
     {
+        cout << "j: "<< j << "len/k"<<(len/k)<<endl;
         ListNode* pNext = pCur->next;
         pCur->next = pPre;
         pPre = pCur;
@@ -55,7 +56,10 @@ ListNode* reverseKGroup(ListNode* head, int k) {
             }
             pEnd = pCur;
         }
-        i++;
+        else
+        {
+            i++;    
+        }
     }
     return head;
 }
