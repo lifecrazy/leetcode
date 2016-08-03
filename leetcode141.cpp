@@ -14,13 +14,13 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 bool hasCycle(ListNode *head) {
-    if(head == NULL)
+    if(head == NULL||head->next == NULL)
     {
         return false;
     }
     ListNode* first = head;
     ListNode* second = head;
-    while(second != NULL)
+    while(second != NULL&& second->next !=NULL)
     {
         first = first->next;
         second = second->next->next;
