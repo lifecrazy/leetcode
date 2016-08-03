@@ -1,5 +1,5 @@
 /*************************************************************************
-> File Name: leetcode141.cpp
+> File Name: leetcode142.cpp
 > Author: 
 > Mail: 
 > Created Time: Wed 06 Jul 2016 10:41:58 PM PDT
@@ -13,23 +13,33 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-bool hasCycle(ListNode *head) {
-    if(head == NULL||head->next == NULL)
+ListNode *detectCycle(ListNode *head) {
+    if(head == NULL || head->next == NULL)
     {
-        return false;
+        return NULL;
     }
     ListNode* first = head;
     ListNode* second = head;
-    while(second != NULL&& second->next !=NULL)
+    ListNode* pStart = head;
+    while(second != NULL)
     {
         first = first->next;
-        second = second->next->next;
+        second = second->next;
+        if(second != NULL)
+        {
+            second = second->next;
+        }
         if(first == second)
         {
-            return true;
+            while(first != pStart)
+            {
+                first = first->next;
+                pStart = pStart->next;
+            }
+            return pStart;
         }
     }
-    return false;
+    return NULL;
 }
 int main()
 {
@@ -45,6 +55,6 @@ int main()
     ListNode* nodeFour = new ListNode(6);
     nodeThree->next = nodeFour;
     nodeFour->next = nodeOne;
-
-    cout << hasCycle(firstList)<<endl;
+    ListNode* node = detectCycle(firstList);
+    cout <<node->val<<endl;
 }
