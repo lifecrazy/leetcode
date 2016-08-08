@@ -14,6 +14,10 @@ struct RandomListNode {
 };
 
 RandomListNode *copyRandomList(RandomListNode *head) {
+    if(head == NULL)
+    {
+        return head;
+    }
     RandomListNode* pCur = head;
     while(pCur != NULL)
     {
