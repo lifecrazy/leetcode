@@ -1,9 +1,9 @@
 /*************************************************************************
-	> File Name: leetcode143.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Sun 07 Aug 2016 06:16:13 PM PDT
- ************************************************************************/
+> File Name: leetcode143.cpp
+> Author: 
+> Mail: 
+> Created Time: Sun 07 Aug 2016 06:16:13 PM PDT
+************************************************************************/
 
 #include<iostream>
 using namespace std;
@@ -56,6 +56,10 @@ void reverseList(ListNode* &head)
     head = pCur;
 }
 void reorderList(ListNode* head) {
+    if(head == NULL || head->next == NULL)
+    {
+        return ;
+    }
     ListNode* front;
     ListNode* end;
     divideList(head,front,end);
@@ -68,14 +72,18 @@ void reorderList(ListNode* head) {
         front = front->next;
         front->next = temp;
         front = front->next;
+        if(end == NULL)
+        {
+            break;
+        }
     }
 }
 int main()
 {
-    ListNode* list = new ListNode(0);
-    int num = 10;
+    ListNode* list = new ListNode(1);
+    int num = 6;
     ListNode* temp = list;
-    for(int i = 1 ; i < num; i++)
+    for(int i = 2 ; i < num; i++)
     {
         ListNode* node = new ListNode(i);
         temp->next = node;
