@@ -33,15 +33,19 @@ RandomListNode *copyRandomList(RandomListNode *head) {
         pCur = pCur->next->next;
     }
     pCur = head->next;
+    RandomListNode* pResult = pCur;
+    RandomListNode* pLast = head; 
     while(pCur != NULL)
     {
-        if(pCur->next != NULL)
+        pLast->next = pCur->next;
+        if(pLast->next != NULL)
         {
-            pCur->next = pCur->next->next;
+            pCur->next = pLast->next->next;
         }
+        pLast = pLast->next;
         pCur = pCur->next;
     }
-    return head->next;
+    return pResult;
 }
 int main()
 {
