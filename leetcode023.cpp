@@ -58,35 +58,37 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
     ListNode* pCur = &results;
     for(int i = 0 ; i < lists.size(); i++)
     {
-        pCur = mergeTwoLists(pCur,lists[i]);
+        pCur->next = mergeTwoLists(pCur->next,lists[i]);
     }
     return results.next;
 }
 int main()
 {
     ListNode* firstList = new ListNode(2);
-    ListNode* nodeOne = new ListNode(5);
+/*    ListNode* nodeOne = new ListNode(5);
     firstList->next = nodeOne;
     ListNode* nodeTwo = new ListNode(10);
     nodeOne->next = nodeTwo;
-    nodeTwo->next = NULL;
-    ListNode* secondList = new ListNode(4);
+    nodeTwo->next = NULL;*/
+ /*   ListNode* secondList = new ListNode(4);
     ListNode* nodeThree = new ListNode(6);
     secondList->next = nodeThree;
     ListNode* nodeFour = new ListNode(49);
     nodeThree->next = nodeFour;
-    nodeFour->next = NULL;
-    ListNode* thirdList = new ListNode(1);
-    ListNode* nodeFive = new ListNode(3);
+    nodeFour->next = NULL;*/
+    ListNode* thirdList = new ListNode(-1);
+ /*   ListNode* nodeFive = new ListNode(3);
     thirdList->next = nodeFive;
     ListNode* nodeSix = new ListNode(5);
     nodeFive->next = nodeSix;
     ListNode* nodeSeven = new ListNode(30);
     nodeSix->next = nodeSeven;
-    nodeSeven->next = NULL;
+    nodeSeven->next = NULL;*/
+    ListNode* fourList = NULL;
     vector<ListNode*> data;
     data.push_back(firstList);
-    data.push_back(secondList);
+   // data.push_back(secondList);
+    data.push_back(fourList);
     data.push_back(thirdList);
     ListNode* results = mergeKLists(data);
     ListNode* p = results;
