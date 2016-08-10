@@ -40,13 +40,14 @@ ListNode* oddEvenList(ListNode* head) {
         i++;
     }
     pOdd->next = evenNode.next;
+    pEven->next = NULL;
     return oddNode.next;
 }
 int main()
 {
     ListNode data(-1);
     ListNode* pCur = &data;
-    int num = 10 ;
+    int num = 3 ;
     for(int i = 0;i < num; i++)
     {
         ListNode* node = new ListNode(i);
