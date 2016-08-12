@@ -76,4 +76,6 @@ int main()
     cout << reverseString(s) << endl;
     string s1 ="leetcode";
     cout << reverseString(s1) << endl;
+    string s2 =" ";
+    cout << reverseString(s2) << endl;
 }
