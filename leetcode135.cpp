@@ -31,7 +31,7 @@ int candy(vector<int>& ratings) {
     }
     for(int i = result.size()-1; i >=0;i--)
     {
-        if((i+1<result.size())&& ratings[i]>ratings[i+1] && result[i] < result[i+1])
+        if((i+1<result.size())&& ratings[i]>ratings[i+1] && result[i] <= result[i+1])
         {
             result[i] = result[i+1] +1;
         }
