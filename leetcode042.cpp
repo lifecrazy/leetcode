@@ -48,7 +48,6 @@ int trap(vector<int>& height) {
     return result;
 }
 //方法二：
-//计算所有突出的面积，然后减去高度的和
 int trap_2(vector<int>& height) {
     int h = 0;
     int left = 0;
@@ -71,11 +70,48 @@ int trap_2(vector<int>& height) {
     }
     return area;
 }
+//方法三
+int trap_3(vector<int>& height) {
+    if(height.size() <= 0)
+    {
+        return 0;
+    }
+    int area = 0 ;
+    int totalCount = 0 ;
+    int max = 0 ;
+    for(int i = 0 ; i < height.size();i++)
+    {
+        totalCount += height[i];
+        if(height[i] > height[max])
+        {
+            max = i;
+        }
+    }
+    int top = 0;
+    for(int i = 0 ; i < max ;i++)
+    {
+        if(height[i] > top)
+        {
+            area += (max - i)*(height[i] - top);
+            top = height[i];
+        }
+    }
+    top = 0 ;
+    for(int i = height.size() - 1 ; i > max; i--)
+    {
+        if(height[i] > top)
+        {
+            area += (i - max)*(height[i] - top);
+            top = height[i];
+        }
+    }
+    return area - totalCount + height[max];
+}
 int main()
 {
     //0,1,0,2,1,0,1,3,2,1,2,1
     vector<int> data;
-    data.push_back(0);
+/*    data.push_back(0);
     data.push_back(1);
     data.push_back(0);
     data.push_back(2);
@@ -86,10 +122,11 @@ int main()
     data.push_back(2);
     data.push_back(1);
     data.push_back(2);
-    data.push_back(1);
- //  data.push_back(2);
-//    data.push_back(0);
- //   data.push_back(2);
+    data.push_back(1);*/
+   data.push_back(2);
+    data.push_back(0);
+    data.push_back(2);
     cout << trap(data)<< endl;
     cout << trap_2(data) << endl;
+    cout<< trap_3(data) << endl;
 }
