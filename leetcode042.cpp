@@ -50,63 +50,32 @@ int trap(vector<int>& height) {
 //方法二：
 //计算所有突出的面积，然后减去高度的和
 int trap_2(vector<int>& height) {
-    int result = 0 ;
-    int max = 0;
-    int totalHeight = 0;
-    for(int i = 0 ; i < height.size(); i++)
+    int h = 0;
+    int left = 0;
+    int right = height.size()-1;
+    int area = 0;
+    while(left < right)
     {
-        totalHeight += height[i];
-        if(height[i] > height[max])
+        if(height[left] < height[right])
         {
-            max = i;
-        }
-    }
-    int width = 0;
-    int top = height[0] ;
-    for(int i = 0 ; i < max; i++)
-    {
-        if(height[i] > top)
-        {
-            result += top * width;
-            top = height[i];
-            width = 1;
+            h = height[left] > h ? height[left] : h;
+            area += (h - height[left]);
+            left++;
         }
         else
         {
-            width++;
+            h = height[right] > h ? height[right] : h;
+            area += (h - height[right]);
+            right--;
         }
     }
-    if(width > 1)
-    {
-        result += top * width;
-    }
-    width = 0;
-    top = height[height.size() - 1];
-    for(int i = height.size() - 1 ; i > max; i-- )
-    {
-        if(height[i] > top)
-        {
-            result += top * width;
-            top = height[i];
-            width = 1;
-        }
-        else
-        {
-            width++;
-        }
-    }
-    if(width > 1)
-    {
-        result += top * width;
-    }
-    result = result - totalHeight + height[max];
-    return result;
+    return area;
 }
 int main()
 {
     //0,1,0,2,1,0,1,3,2,1,2,1
     vector<int> data;
-/*    data.push_back(0);
+    data.push_back(0);
     data.push_back(1);
     data.push_back(0);
     data.push_back(2);
@@ -117,10 +86,10 @@ int main()
     data.push_back(2);
     data.push_back(1);
     data.push_back(2);
-    data.push_back(1);*/
-    data.push_back(2);
-    data.push_back(0);
-    data.push_back(2);
+    data.push_back(1);
+ //  data.push_back(2);
+//    data.push_back(0);
+ //   data.push_back(2);
     cout << trap(data)<< endl;
     cout << trap_2(data) << endl;
 }
