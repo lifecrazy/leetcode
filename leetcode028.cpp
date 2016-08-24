@@ -9,6 +9,8 @@
 #include<string>
 
 using namespace std;
+//方法一暴力破解的方法 
+//
 int strStr(string haystack, string needle) {
     int result = -1;
     for(int i = 0 ; i < haystack.length();i++)
@@ -33,5 +35,6 @@ int main()
 {
     string str = "abcdefghijk";
     string needle = "ghi";
+    cout << strStr("","") <<endl;
     cout << strStr(str,needle)<< endl;
 }
