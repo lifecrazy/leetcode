@@ -1,9 +1,9 @@
 /*************************************************************************
-	> File Name: leetcode008.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Wed 24 Aug 2016 06:15:21 PM PDT
- ************************************************************************/
+> File Name: leetcode008.cpp
+> Author: 
+> Mail: 
+> Created Time: Wed 24 Aug 2016 06:15:21 PM PDT
+************************************************************************/
 
 #include<iostream>
 #include<string>
@@ -22,26 +22,36 @@ int myAtoi(string str) {
     {
         index++;
     }
-    //判断第一个非空字符是否为正负符号
+    //判断数字的正负号
     bool flag = false;
-    if(str[index] == '-')
+    if(str[index] == '+')
     {
+        index++;
+    }
+    else if(str[index] == '-')
+    {
+        index++;
         flag = true;
     }
     int result = 0;
     while(index < len)
-    {
-        if(result > INT_MAX / 10 || (result == INT_MAX/ 10 && (str[index] - '0') >INT_MAX % 10))
-        {
-            return flag ? INT_MIN :INT_MAX;
-        }
+    {      
         if('0'<= str[index] && str[index] <='9')
         {
+            if(result > INT_MAX / 10 || (result == INT_MAX/ 10 && (str[index] - '0') >INT_MAX % 10))
+            {
+                return flag  ? INT_MIN :INT_MAX;
+
+            }
             result =(result * 10 + (str[index]-'0'));
+        }
+        else
+        {
+            break;
         }
         index++;
     }
-    return flag ? result * (-1) : result;
+    return flag ? result * (-1):result ;
 }
 int main()
 {
@@ -50,4 +60,5 @@ int main()
     cout << myAtoi("-123") <<endl;
     cout << myAtoi("123") <<endl;
     cout << myAtoi("11111111111111111111111111111111111111111111111111111111111")<<endl;
+    cout << myAtoi("+-2")<<endl;
 }
