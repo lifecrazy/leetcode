@@ -11,16 +11,19 @@ using namespace std;
 
 int lengthOfLastWord(string s) {
     int len = 0 ;
-    for(int i = 0 ;i < s.length();i++)
+    int i = s.length() - 1;
+    while(s[i] == ' ')
+    {
+        i--;
+    }
+    while(i >= 0)
     {
         if(s[i] == ' ')
         {
-            len = 0;
+            break;
         }
-        else
-        {
-            len++;
-        }
+        len++;
+        i--;
     }
     return len;
 }
@@ -29,4 +32,8 @@ int main()
 {
     string s = "hello world";
     cout << lengthOfLastWord(s) << endl;
+    cout << lengthOfLastWord(" ") << endl;
+    cout << lengthOfLastWord("a ") << endl;
+    cout << lengthOfLastWord("a b ") << endl;
+    cout << lengthOfLastWord("a b                                                  ") << endl;
 }
