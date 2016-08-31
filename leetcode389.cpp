@@ -10,16 +10,7 @@
 #include<map>
 using namespace std;
 char findTheDifference(string s, string t) {
-/*    char c;
-    for(int i = 0 ; i < t.size();i++)
-    {
-        if(s.find(t[i]) == std::string::npos)
-        {
-            c = t[i];
-        }
-    }
-    return c;*/
-    
+    //不仅要考虑是否种类上的不一样也要考虑个数上的不一样的问题
     char c;
     map<char,int> s_map;
     for(int i = 0 ;i < s.size(); i++)
