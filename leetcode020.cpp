@@ -13,8 +13,9 @@ bool isValid(string s) {
     string left ="({[";
     string right = ")}]";
     vector<char> stk;
-    bool flag = true;
-    for(int i = 0 ; i < s.length();i++)
+    bool flag = false;
+    int i = 0;
+    for(; i < s.length();i++)
     {
         if(left.find(s[i]) != std::string::npos)
         {
@@ -23,7 +24,7 @@ bool isValid(string s) {
         else if(right.find(s[i]) != std::string::npos)
         {
             int temp = right.find(s[i]);
-            if(stk[stk.size() - 1] != left[temp])
+            if(stk.size() > 0 && (stk[stk.size() - 1] != left[temp]))
             {
                 flag = false;
                 break;
@@ -39,11 +40,19 @@ bool isValid(string s) {
             break;
         }
     }
+    if(stk.size() == 0 && i == s.length())
+    {
+        flag = true;
+    }
     return flag;
 }
 int main()
 {
     cout << isValid("(){}[]")<<endl;
+    cout << isValid("(")<<endl;
+    cout << isValid("}")<<endl;
+    cout << isValid("(){}[")<<endl;
+    cout << isValid("(){}[]}")<<endl;
     cout << isValid("({})[]")<<endl;
     cout << isValid("({)}[]")<<endl;
 }
