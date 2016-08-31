@@ -24,7 +24,7 @@ int longestValidParentheses(string s)
         {
             stk.push_back(i);
         }
-        else 
+        else if(')' == s[i])
         {
             if(stk.size() > 0)
             {
@@ -38,7 +38,6 @@ int longestValidParentheses(string s)
     int cur_len = 0;
     for(int i = 0 ; i < s.length();i++)
     {
-        cout << flags[i] << '\t';
         if(flags[i] == 1)
         {
             cur_len++;
@@ -51,14 +50,14 @@ int longestValidParentheses(string s)
         {
             max_len = cur_len;
         }
-
     }
-    cout<< endl;
     return max_len;
 }
            int main()
            {
                cout << longestValidParentheses("(()")<<endl;
                cout << longestValidParentheses(")()()(")<<endl;
-               cout << longestValidParentheses("(((())))")<<endl;
+        //       cout << longestValidParentheses("(((())))")<<endl;
+          //     cout << longestValidParentheses("(((())))()")<<endl;
+            //   cout << longestValidParentheses("(((())())())()")<<endl;
            }
