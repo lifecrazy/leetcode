@@ -6,7 +6,7 @@
 ************************************************************************/
 
 #include<iostream>
-#include<vector>
+#include<stack>
 #include<string>
 using namespace std;
 
@@ -17,20 +17,20 @@ int longestValidParentheses(string s)
     {
         flags[i] = 0;
     }
-    vector<char> stk;
+    stack<int> stk;
     for(int i = 0; i < s.length();i++)
     {
         if('(' == s[i])
         {
-            stk.push_back(i);
+            stk.push(i);
         }
         else if(')' == s[i])
         {
             if(stk.size() > 0)
             {
                 flags[i] = 1;
-                flags[stk[stk.size() - 1]] = 1;
-                stk.erase(stk.end() -1);
+                flags[stk.top()] = 1;
+                stk.pop();
             }
         }
     }
