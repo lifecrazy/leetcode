@@ -1,9 +1,9 @@
 /*************************************************************************
-	> File Name: leetcode020.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Tue 30 Aug 2016 07:45:19 PM PDT
- ************************************************************************/
+> File Name: leetcode020.cpp
+> Author: 
+> Mail: 
+> Created Time: Tue 30 Aug 2016 07:45:19 PM PDT
+************************************************************************/
 
 #include<iostream>
 #include<vector>
@@ -24,14 +24,22 @@ bool isValid(string s) {
         else if(right.find(s[i]) != std::string::npos)
         {
             int temp = right.find(s[i]);
-            if(stk.size() > 0 && (stk[stk.size() - 1] != left[temp]))
+            if(stk.size() > 0 )
             {
-                flag = false;
-                break;
+                if(stk[stk.size() - 1] != left[temp])
+                {
+                    flag = false;
+                    break;
+                }
+                else
+                {
+                    stk.erase(stk.end()-1);
+                }
             }
             else
             {
-                stk.erase(stk.end()-1);
+                flag = false;
+                break;
             }
         }
         else
@@ -48,6 +56,7 @@ bool isValid(string s) {
 }
 int main()
 {
+    cout << isValid("{}][}}{[))){}{}){(}]))})[({")<<endl;
     cout << isValid("(){}[]")<<endl;
     cout << isValid("(")<<endl;
     cout << isValid("}")<<endl;
