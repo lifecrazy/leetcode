@@ -1,14 +1,31 @@
 # leetcode
 <table>
-  <th>
-  <td>#
-  </td>
-    <td>title
-  </td>
-    <td>Solution
-  </td>
-    <td>Difficulty
-  </td>
-  </th>
-
+ <tr>
+   <th>
+    #
+   </th>
+   <th>
+    title
+   </th>
+   <th>
+    Solution
+   </th>
+   <th>
+     Difficulty
+   </th>
+ </tr>
+ <tr>
+   <td>
+    075
+   </td>
+   <td>
+    Sort Colors
+   </td>
+   <td>
+    c++
+   </td>
+   <td>
+    medium
+   </td>
+ </tr>
 </table>
