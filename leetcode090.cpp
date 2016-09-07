@@ -24,7 +24,7 @@ vector<vector<int> > subsets(vector<int>& nums) {
     int last = 0;
     for(int i = 0; i < len; i++)
     { 
-        if(i - 1 > 0 && nums[i - 1] == nums[i])
+        if(i - 1 >= 0 && nums[i - 1] == nums[i])
         {
             index = last; 
         }
