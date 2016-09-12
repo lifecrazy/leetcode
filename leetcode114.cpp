@@ -16,6 +16,7 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+//层次遍历展示每层的结点
 void showAccordingthelevel(TreeNode* root)
 {
     queue<TreeNode*> q;
@@ -37,8 +38,12 @@ void showAccordingthelevel(TreeNode* root)
         q = temp;
     }
 }
-void preOrder(TreeNode* root)
-{
+//方法一 借用队列 开辟o(n)空间辅助
+void flatten(TreeNode* root) {
+    if(root == NULL)
+    {
+        return;
+    }
     stack<TreeNode*> s;
     queue<TreeNode*> q;
     TreeNode* pCur = root;
@@ -67,10 +72,29 @@ void preOrder(TreeNode* root)
         q.pop();
     }
 }
-void flatten(TreeNode* root) {
-    preOrder(root);
+//方法二：
+void flatten_2(TreeNode* root)
+{
+     if(root == NULL)
+    {
+        return;
+    }
+    while(root != NULL)
+    {
+        if(root->left)
+        {
+            TreeNode* pPre = root->left;
+            while(pPre->right != NULL)
+            {
+                pPre = pPre->right;
+            }
+            pPre->right = root->right;
+            root->right = root->left;
+            root->left = NULL;
+        }
+        root = root->right;
+    }
 }
-
 int main()
 {
     TreeNode* root = new TreeNode(1);
@@ -86,7 +110,7 @@ int main()
     five->right = six;
     flatten;
     showAccordingthelevel(root);
-    flatten(root);
+    flatten_2(root);
     showAccordingthelevel(root);
 }
 
