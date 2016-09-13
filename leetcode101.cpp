@@ -16,11 +16,11 @@ struct TreeNode {
 };
 
 bool isSymmetric(TreeNode* left,TreeNode* right) {
-    if(left != NULL && right != NULL)
+    if(left == NULL && right == NULL)
     {
         return true;
     }
-    if(left != NULL || right != NULL)
+    if(left == NULL || right == NULL)
     {
         return false;
     }
@@ -32,9 +32,9 @@ bool isSymmetric(TreeNode* root) {
 int main()
 {
     TreeNode* root = new TreeNode(1);
-    TreeNode* left = new TreeNode(2);
-    TreeNode* right = new TreeNode(2);
-    root->left = left;
-    root->right = right;
+//    TreeNode* left = new TreeNode(2);
+  //  TreeNode* right = new TreeNode(2);
+   // root->left = left;
+   // root->right = right;
     cout << isSymmetric(root) << endl;
 }
