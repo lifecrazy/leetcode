@@ -15,7 +15,49 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+TreeNode* pMissTakeOne = NULL;
+TreeNode* pMissTakeTwo = NULL;
+TreeNode* pre = NULL;
+void InOrderTraversal(TreeNode* root)
+{
+    if(root == NULL)
+    {
+        return;
+    }
+    if(root->left != NULL)
+    {
+        InOrderTraversal(root->left);
+    }
+    if(pre != NULL && root->val < pre->val)
+    {
+        if(pMissTakeOne == NULL)
+        {
+            pMissTakeOne = pre;
+            pMissTakeTwo = root;
+        }
+        else
+        {
+            pMissTakeTwo = root;
+        }
+    }
+    pre = root;
+    if(root->right != NULL)
+    {
+        InOrderTraversal(root->right);
+    }
+}
 void recoverTree(TreeNode* root) 
+{
+    InOrderTraversal(root);
+    if(pMissTakeOne != NULL && pMissTakeTwo != NULL)
+    {
+        int temp = pMissTakeOne->val;
+        pMissTakeOne->val = pMissTakeTwo->val;
+        pMissTakeTwo->val = temp;
+    }
+}
+void recoverTree_2(TreeNode* root) 
 {
     if(root == NULL)
     {
@@ -89,8 +131,8 @@ int main()
     *         4     7    13
     * 中序遍历：1 3 4 6 7 8 10  13   14 
     * */
-    TreeNode* first = new TreeNode(8);
-    TreeNode* sec = new TreeNode(13);
+    TreeNode* first = new TreeNode(7);
+    TreeNode* sec = new TreeNode(3);
     TreeNode* third = new TreeNode(10);
     first->left = sec;
     first->right = third;
@@ -99,12 +141,12 @@ int main()
     sec->left = fourth;
     sec->right = five;
     TreeNode* six = new TreeNode(4);
-    TreeNode* seven = new TreeNode(7);
+    TreeNode* seven = new TreeNode(8);
     five->left = six;
     five->right = seven;
     TreeNode* eight = new TreeNode(14);
     third->right = eight;
-    TreeNode* nineth = new TreeNode(3);
+    TreeNode* nineth = new TreeNode(13);
     eight->left = nineth;
     showTree(first);
     recoverTree(first);
