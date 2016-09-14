@@ -16,7 +16,7 @@ struct TreeNode {
 };
 vector<TreeNode*> generateTrees(int begin ,int end)
 {
-    vector<TreeNode*> res;
+    vector<TreeNode* > res;
     if(begin > end)
     {
         res.push_back(NULL);
@@ -32,24 +32,22 @@ vector<TreeNode*> generateTrees(int begin ,int end)
         {
             for(int j = 0; j < rightSubTree.size();j++)
             {
-                TreeNode* node = new TreeNode(i);
+                TreeNode* node = new TreeNode(i + 1);
+                res.push_back(node);
                 node->left = leftSubTree[k];
                 node->right = rightSubTree[j];
-                res.push_back(node);
             }
         }
     }
     return res;
 }
 vector<TreeNode*> generateTrees(int n) {
-    if(n <= 0)
+    if(0 == n)
     {
-        return generateTrees(1,0);
+        vector<TreeNode*> ret;
+        return ret;
     }
-    else
-    {
-        return generateTrees(1,n);
-    }
+    return generateTrees(0, n - 1);
 }
 void PreOrder(TreeNode* root)
 {
@@ -62,7 +60,7 @@ void PreOrder(TreeNode* root)
 }
 int main()
 {
-    vector<TreeNode*> res = generateTrees(4);
+    vector<TreeNode*> res = generateTrees(3);
     for(int i = 0 ; i < res.size();i++)
     {
         PreOrder(res[i]);
