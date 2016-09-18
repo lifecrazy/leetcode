@@ -31,7 +31,7 @@ bool InorderTraversal(TreeNode* root) {
         {
             p = s.top();
             s.pop();
-            if(pre != NULL && pre->val > p->val)
+            if(pre != NULL && pre->val >= p->val)
             {
                 return false;
             }
