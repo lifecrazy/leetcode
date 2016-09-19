@@ -20,7 +20,7 @@ bool dfs(TreeNode* root ,int sum ,int cur)
     {
         return false;
     }
-    if(root->left == NULL || root->right == NULL)
+    if(root->left == NULL && root->right == NULL)
     {
         return cur + root->val == sum;
     }
