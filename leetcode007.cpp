@@ -6,25 +6,25 @@
  ************************************************************************/
 
 #include<iostream>
+#include<climits>
 using namespace std;
 
 int reverse(int x) {
-    int flag = 1;
-    if(x < 0)
-    {
-        x = 0 - x;
-        flag = -1;
-    }
-    int result = 0;
+    long result = 0;
     while(x != 0)
     {
         result = result * 10 +(x % 10);
+        if(result > INT_MAX || result < INT_MIN)
+        {
+            return 0;
+        }
         x = x /10;
     }
-    return result * flag;
+    return result;
 }
 int main()
 {
     cout << reverse(321) << endl;
     cout << reverse(-321) << endl;
+    cout << reverse(1534236469) <<endl;
 }
