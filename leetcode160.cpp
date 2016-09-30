@@ -64,6 +64,8 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         {
             return pA;
         }
+        pA = pA->next;
+        pB = pB->next;
     }
     return NULL;
 }
