@@ -16,7 +16,7 @@ struct Interval {
     Interval() : start(0), end(0) {}
     Interval(int s, int e) : start(s), end(e) {}
 };
-bool sort_by_start(const Interval& a ,const Interval& b)
+static bool sort_by_start(const Interval& a ,const Interval& b)
 {
     return a.start < b.start;
 }
