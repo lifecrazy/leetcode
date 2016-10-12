@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 struct Interval {
@@ -15,22 +16,35 @@ struct Interval {
     Interval() : start(0), end(0) {}
     Interval(int s, int e) : start(s), end(e) {}
 };
+bool sort_by_start(const Interval& a ,const Interval& b)
+{
+    return a.start < b.start;
+}
 vector<Interval> merge(vector<Interval>& intervals) {
     vector<Interval> result;
+    sort(intervals.begin(),intervals.end(),sort_by_start);
     int k = 1;
     for(int i = 0 ; i < intervals.size();i += k)
     {
+        int start = intervals[i].start;
         int end = intervals[i].end;
         k = 1;
         for(int j = i + 1; j < intervals.size();j++)
         {
             if(end >= intervals[j].start)
             {
-                end = intervals[j].end;
                 k++;
+                if(intervals[j].start < start)
+                {
+                    start = intervals[j].start;
+                }
+                if(intervals[j].end > end)
+                {
+                    end = intervals[j].end;
+                }
             }
         }
-        result.push_back(Interval(intervals[i].start,end));
+        result.push_back(Interval(start,end));
     }
     return result;
 }
@@ -46,8 +60,8 @@ int main()
     data.push_back(third);
     data.push_back(forth);*/
     vector<Interval> data;
-//    data.push_back(Interval(1,4));
-  //  data.push_back(Interval(1,4));
+    data.push_back(Interval(1,4));
+    data.push_back(Interval(0,5));
     vector<Interval> result = merge(data);
     for(int i = 0 ; i < result.size(); i++)
     {
