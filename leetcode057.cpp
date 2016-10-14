@@ -37,8 +37,9 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
             return ret;
         }
         else if(newInterval.start > intervals[i].end)
-        ret.push_back(intervals[i]);
-        //overlapping
+        {
+            ret.push_back(intervals[i]);
+        }
         else
         {
             newInterval.start = min(newInterval.start, intervals[i].start);
