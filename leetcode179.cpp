@@ -26,7 +26,7 @@ string largestNumber(vector<int>& nums) {
     {
         res += s_num[i];
     }
-    if(res == "0")
+    if(res[0] == '0')
         return "0";
     return res;
 }
