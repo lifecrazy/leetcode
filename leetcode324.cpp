@@ -78,11 +78,11 @@ using namespace std;
 void wiggleSort(vector<int>& nums) {
     vector<int> temp = nums;
     sort(temp.begin(),temp.end());
-    int j = nums.size() / 2 - 1;
-    int k = nums.size() - 1;
+    int j = (nums.size() + 1)/ 2;
+    int k = nums.size();
     for(int i = 0 ;i < nums.size();i++)
     {
-        nums[i] = (i % 2 != 1) ? temp[j--]:temp[k--];
+        nums[i] = (i % 2 != 1) ? temp[--j]:temp[--k];
     }
 }
 int main()
