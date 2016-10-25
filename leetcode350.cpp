@@ -19,7 +19,7 @@ vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
     map<int,int> num_map;
     for (int i = 0;i < nums1.size(); i++)
     {
-        num_map[nums1[1]]++;
+        num_map[nums1[i]]++;
     }
     for (int i = 0;i < nums2.size(); i++)
     {
