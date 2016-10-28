@@ -9,6 +9,7 @@
 #include<vector>
 #include<algorithm>
 #include<set>
+#include<limits.h>
 using namespace std;
 //方法一利用set自动排序的功能 当set大小超过3的时候直接删除第一个元素即可
 //始终保持第一个元素为第三大元素
@@ -47,7 +48,7 @@ int thirdMax_2(vector<int>& nums)
         int first = INT_MIN;
         int sec = INT_MIN;
         int third = INT_MIN;
-       i// int count = 0;
+        int count = 0;
         int bottom =0;
         for(int i = 0 ; i < nums.size();i++)
         {
@@ -66,21 +67,25 @@ int thirdMax_2(vector<int>& nums)
                 third = sec;
                 sec = first;
                 first = nums[i];
+                count++;
             }
             else if(nums[i] > sec)
             {
                 third = sec;
                 sec = nums[i];
+                count++;
             }
             else if(nums[i] >third)
             {
                 third = nums[i];
+                count++;
             }
         }
-        return bottom ? sec:third;
+        return bottom+count>=3 ? third:first;
     } 
 }
 //超时
+/*
 int thirdMax_3(vector<int>& nums) {
     if(nums.size() == 1)
     {
@@ -111,14 +116,15 @@ int thirdMax_3(vector<int>& nums) {
         }
         return nums[result];
     }
-}
+}*/
 int main()
 {
     vector<int> data;
     data.push_back(2);
-    data.push_back(2);
+   // data.push_back(2);
+    //data.push_back(INT_MIN);
     data.push_back(3);
-    data.push_back(1)
+    data.push_back(1);
     cout << thirdMax(data) << endl;
     cout << thirdMax_2(data) << endl;
 }
