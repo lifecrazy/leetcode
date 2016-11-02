@@ -17,6 +17,34 @@ struct Interval {
 };
 
 vector<int> findRightInterval(vector<Interval>& intervals) {
+    vector<int> res(intervals.size(),-1);
+    if(intervals.size() <= 1)
+    {
+        return res;
+    }
+    vector<pair<Interval,int> > tmp;
+    for(int i = 0 ; i < intervals.size();i++)
+    {
+        tmp.push_back(pair<Interval,int>(intervals[i],i));
+    }
+    sort(tmp.begin(),tmp.end(),[](pair<Interval,int>& x,pair<Interval,int>& y)->int{
+        return x.first.start < y.first.start || (x.first.start == y.first.start && x.first.end < y.first.end);
+    });
+    for(int i = 0; i < intervals.size(); i++)
+    {
+        for(int j = i + 1; j < intervals.size(); j++)
+        {
+            if(tmp[j].first.start >= tmp[i].first.end)
+            {
+                res[tmp[i].second] = tmp[j].second;
+                break;
+            }
+        }
+    }
+    return res;
+}
+//方法超时。。。。
+vector<int> findRightInterval_2(vector<Interval>& intervals) {
     vector<int> res;
     if(intervals.size() <= 1)
     {
@@ -43,12 +71,12 @@ vector<int> findRightInterval(vector<Interval>& intervals) {
 int main()
 {
     vector<Interval> data;
- /*    data.push_back(Interval(3,4));
+     data.push_back(Interval(3,4));
     data.push_back(Interval(2,3));
-    data.push_back(Interval(1,2));*/
-   data.push_back(Interval(1,4));
+    data.push_back(Interval(1,2));
+/*   data.push_back(Interval(1,4));
     data.push_back(Interval(2,3));
-    data.push_back(Interval(3,4));
+    data.push_back(Interval(3,4));*/
     vector<int> result = findRightInterval(data);
     for(int i = 0; i <result.size(); i++)
     {
