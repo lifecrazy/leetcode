@@ -9,7 +9,36 @@
 #include<string>
 #include<map>
 using namespace std;
+
 char findTheDifference(string s, string t) {
+    map<char,int> t_map;
+    char c;
+    for(int i = 0 ; i < t.size();i++)
+    {
+        if(t_map.find(t[i]) == t_map.end())
+        {
+            t_map[t[i]] = 1;
+        }
+        else
+        {
+            t_map[t[i]]++;
+        }
+    }
+    for(int i = 0; i < s.size();i++)
+    {
+        t_map[s[i]]--;
+    }
+    for(map<char,int>::iterator it = t_map.begin();it != t_map.end();it++)
+    {
+        if(it->second != 0)
+        {
+            c = it->first;
+            break;
+        }
+    }
+    return c;
+}
+char findTheDifference_2(string s, string t) {
     //不仅要考虑是否种类上的不一样也要考虑个数上的不一样的问题
     char c;
     map<char,int> s_map;
