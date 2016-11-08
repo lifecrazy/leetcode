@@ -12,7 +12,7 @@ using namespace std;
 
 int findMinArrowShots(vector<pair<int, int> >& points) {
     sort(points.begin(),points.end(),[](pair<int,int>& x ,pair<int,int>& y)->int{
-        return x.first < y.first || (x.first == y.first && x.second < y.second);
+        return x.second < y.second || (x.second == y.second && x.first < y.first);
     });
     int result = 1;
     int end = points[0].second;
@@ -31,9 +31,17 @@ int findMinArrowShots(vector<pair<int, int> >& points) {
 int main()
 {
     vector<pair<int,int> > nums;
-    nums.push_back(make_pair(10,16));
+    /*nums.push_back(make_pair(10,16));
     nums.push_back(make_pair(2,8));
     nums.push_back(make_pair(1,6));
-    nums.push_back(make_pair(7,12));
+    nums.push_back(make_pair(7,12));*/
+
+    nums.push_back(make_pair(9,12));
+    nums.push_back(make_pair(1,10));
+    nums.push_back(make_pair(4,11));
+    nums.push_back(make_pair(8,12));
+    nums.push_back(make_pair(3,9));
+    nums.push_back(make_pair(6,9));
+    nums.push_back(make_pair(6,7));
     cout << findMinArrowShots(nums) << endl;
 }
