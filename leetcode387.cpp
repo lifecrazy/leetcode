@@ -38,6 +38,10 @@ int firstUniqChar(string s) {
             min = letter[i].first;
         }
     }
+    if(min == s.length())
+    {
+        min = -1;
+    }
     return min;
 }
 int main()
@@ -46,4 +50,6 @@ int main()
     cout << firstUniqChar(s) << endl;
     string s1= "loveleetcode";
     cout << firstUniqChar(s1)<< endl;
+    cout << firstUniqChar("") << endl;
+    cout << firstUniqChar("aa") << endl;
 }
