@@ -25,29 +25,26 @@ bool find132pattern(vector<int>& nums) {
     {
         return false;
     }
-    for(int i = 0 ; i < nums.size();i++)
+    int j = 0;
+    int k = 0;
+    for(int i = 0 ; i < nums.size();i +=(j+1))
     {
-        //寻找“3” 的位置
-        int j = i + 1;
-        for(;j <nums.size();j++)
+        while(i+1 < nums.size() && nums[i] >= nums[i + 1])
         {
-            if(nums[i] < nums[j])
-            {
-                break;
-            }
-        } 
-        //寻找“2”的位置
-        int k = j + 1;
-        for(;k < nums.size();k++)
-        {
-            if(nums[j] > nums[k])
-            {
-                break;
-            }
+            i++;
         }
-        if( nums[i] <nums[k] )
+        j = i+1;
+        while(j+1 < nums.size() && nums[j] <= nums[j + 1])
         {
-            return true;
+            j++;
+        }
+        k = j+1;
+        for(;k < nums.size() ;k++)
+        {
+            if(nums[k] < nums[i] && nums[k] > nums[j])
+            {
+                return true;
+            }
         }
     }
     return false;
@@ -60,8 +57,9 @@ int main()
     nums.push_back(2);
     nums.push_back(0);*/
     nums.push_back(1);
-    nums.push_back(2);
-    nums.push_back(3);
-    nums.push_back(4);
+    nums.push_back(0);
+    nums.push_back(1);
+    nums.push_back(-4);
+    nums.push_back(-3);
     cout << find132pattern(nums) << endl;
 }
