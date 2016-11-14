@@ -9,7 +9,17 @@
 #include<vector>
 #include<limits.h>
 using namespace std;
+/*
+bool find132pattern(vector<int>& nums) {
+    if(nums.size() < 3)
+    {
+        return false;
+    }
+    return false;
+    
+}*/
 
+//超时
 bool find132pattern(vector<int>& nums) {
     if(nums.size() < 3)
     {
@@ -17,19 +27,27 @@ bool find132pattern(vector<int>& nums) {
     }
     for(int i = 0 ; i < nums.size();i++)
     {
-        for(int j = i + 1;j <nums.size();j++)
+        //寻找“3” 的位置
+        int j = i + 1;
+        for(;j <nums.size();j++)
         {
-            if(nums[i] >= nums[j])
+            if(nums[i] < nums[j])
             {
-                continue;
+                break;
             }
-            for(int k = j + 1; k <nums.size();k++)
+        } 
+        //寻找“2”的位置
+        int k = j + 1;
+        for(;k < nums.size();k++)
+        {
+            if(nums[j] > nums[k])
             {
-                if(nums[j] > nums[k])
-                {
-                    return true;
-                }
+                break;
             }
+        }
+        if( nums[i] <nums[k] )
+        {
+            return true;
         }
     }
     return false;
