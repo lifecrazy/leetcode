@@ -10,34 +10,6 @@
 #include<limits.h>
 using namespace std;
 
-bool find132pattern(vector<int>& nums) {
-    if(nums.size() < 3)
-    {
-        return false;
-    }
-    for(int i = 0 ; i < nums.size();i++)
-    {
-        int j = i+1;
-        for(;j < nums.size();j++)
-        {
-            // "1"    <    "3"
-            if(nums[i] < nums[j])
-            {
-                break;
-            }
-        }
-        int k = j+1;
-        for(;k < nums.size();k++)
-        {
-            // "3"      "2"                   "1"
-            if(nums[j] > nums[k] && nums[k] > nums[i])
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 //
 bool find132pattern_2(vector<int>& nums) {
