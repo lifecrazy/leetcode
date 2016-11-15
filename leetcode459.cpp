@@ -7,35 +7,40 @@
 
 #include<iostream>
 using namespace std;
+    
+bool IsSame(string str, int i)
+{
+    for(int j = i ; j < str.size(); j +=i)
+    {
+        if(str.substr(0,i) != str.substr(j,i))
+        {
+            return false;
+        }
+    }
+    return true;
+} 
+
 bool repeatedSubstringPattern(string str) {
     if(str.size() < 2)
     {
         return false;
     }
-    for(int i = 0; i < str.size()/2;i++)
+    //步长
+    for(int i = 1; i <= str.size()/2;i++)
     {
-        for(int j = i + 1; j < str.size();j++)
+        if(IsSame(str,i))
         {
-            int count = 0;
-            for(int k = 0; k < i + 1;k++)
-            {
-                if(str[i + k] == str[j + k])
-                {
-                    count++;
-                }
-                if(count > 1)
-                {
-                    return true;
-                }
-            }
+            return true;
         }
     }
     return false;
 }
 int main()
 {
-    cout << repeatedSubstringPattern("abc") << endl;
-    cout << repeatedSubstringPattern("abcabc") <<endl;
-    cout << repeatedSubstringPattern("abcabcac") <<endl;
-    cout << repeatedSubstringPattern("acabcac") <<endl;
+    //"ababac"
+    cout << "abc" <<repeatedSubstringPattern("abc") << endl;
+    cout << "abcabc"<<repeatedSubstringPattern("abcabc") <<endl;
+    cout << "abcabcac"<<repeatedSubstringPattern("abcabcac") <<endl;
+    cout << "acac" <<repeatedSubstringPattern("acac") <<endl;
+    cout << "acacab" << repeatedSubstringPattern("acacab") <<endl;
 }
