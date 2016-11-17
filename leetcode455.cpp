@@ -12,19 +12,19 @@
 using namespace std;
 
 int findContentChildren(vector<int>& g, vector<int>& s) {
-    int min = INT_MAX;
+    int max = INT_MIN;
     for(int i = 0; i < s.size();i++)
     {
-        if(s[i] > min)
+        if(s[i] > max)
         {
-            min = s[i];
+            max = s[i];
         }
     }
     int result = 0 ;
     sort(g.begin(),g.end());
     for(int i = 0 ; i < g.size();i++)
     {
-        if(g[i] <= min)
+        if(g[i] <= max)
         {
             result++;
         }
@@ -40,10 +40,10 @@ int main()
 {
     vector<int> g;
     g.push_back(1);
-    g.push_back(2);
+    g.push_back(1);
     vector<int> s;
     s.push_back(1);
     s.push_back(2);
     s.push_back(3);
-    cout << findContentChildren(g,s) << endl;
+    cout << findContentChildren(s,g) << endl;
 }
