@@ -12,28 +12,17 @@
 using namespace std;
 
 int findContentChildren(vector<int>& g, vector<int>& s) {
-    int max = INT_MIN;
-    for(int i = 0; i < s.size();i++)
-    {
-        if(s[i] > max)
-        {
-            max = s[i];
-        }
-    }
-    int result = 0 ;
     sort(g.begin(),g.end());
-    for(int i = 0 ; i < g.size();i++)
+    sort(s.begin(),s.end());
+    int i = 0 ;
+    for(int j = 0; i < g.size() && j < s.size();j++)
     {
-        if(g[i] <= max)
+        if(g[i] <= s[j])
         {
-            result++;
-        }
-        else
-        {
-            break;
+            i++;
         }
     }
-    return result;
+    return i;
 }
 
 int main()
