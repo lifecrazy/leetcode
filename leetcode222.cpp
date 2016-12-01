@@ -8,6 +8,7 @@
 #include<iostream>
 #include<vector>
 #include<stack>
+#include<cmath>
 using namespace std;
 struct TreeNode {
     int val;
@@ -15,23 +16,8 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
-//方法一递归
-vector<int> result;
-void preorder(TreeNode* root)
-{
-    if(root != NULL)
-    {
-        result.push_back(root->val);
-        preorder(root->left);
-        preorder(root->right);
-    }
-}
-vector<int> preorderTraversal(TreeNode* root) {
-    preorder(root);
-    return result;
-}
-
- int countNodes(TreeNode* root) {
+//按照前序遍历 超时
+int countNodes_2(TreeNode* root) {
     stack<TreeNode*> s;
     TreeNode* p = root;
     int count = 0;
@@ -52,6 +38,27 @@ vector<int> preorderTraversal(TreeNode* root) {
     }
     return count;
 }
+int countNodes(TreeNode* root) {
+    int lCount = 0;
+    int rCount = 0;
+    TreeNode* pLeft = root;
+    TreeNode* pRight = root;
+    while(pLeft != NULL)
+    {
+        lCount++;
+        pLeft = pLeft->left;
+    }
+    while(pRight != NULL)
+    {
+        rCount++;
+        pRight = pRight->right;
+    }
+    if(lCount == rCount)
+    {
+        return pow(2,lCount) - 1;
+    }
+    return countNodes(root->left) + countNodes(root->right) +1;
+}
 int main()
 {
     TreeNode* root = new TreeNode(1);
@@ -59,11 +66,5 @@ int main()
     TreeNode* sec = new TreeNode(3);
     root->right = first;
     first->left = sec;
-    vector<int> result = preorderTraversal(root);
-    for(int i = 0 ; i < result.size();i++)
-    {
-        cout << result[i] << '\t';
-    }
-    cout << endl;
     cout << countNodes(root) << endl;
 }
