@@ -44,7 +44,7 @@ bool repeatedSubstringPattern(string str) {
     }
     for(int i = len / 2; i > 0; i--)
     {
-        if(len % 2 == 0)
+        if(len % i == 0)
         {
             string tmp = "";
             string sub = str.substr(0,i);
