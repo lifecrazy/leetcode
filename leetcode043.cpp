@@ -50,7 +50,10 @@ string multiply(string num1, string num2) {
         }
         else
         {
-            res.pop_back();
+            if(res.size() != 1)
+            {
+                res.pop_back();
+            }
         }
     }
     res = reverse(res);
@@ -59,5 +62,5 @@ string multiply(string num1, string num2) {
 int main()
 {
     //cout <<"abcd\t"<< reverse("abcd") <<endl;
-    cout << multiply("17","5")<<endl;
+    cout << multiply("0","0")<<endl;
 }
