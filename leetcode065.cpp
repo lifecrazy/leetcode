@@ -21,8 +21,7 @@ bool isNumber(string s) {
     {
         right--;
     }
-    cout << "left:"<<left<<"right:"<<right<<endl;
-    //如果第一个非空字符为正负号则跳过
+        //如果第一个非空字符为正负号则跳过
     if(s[left] == '-'||s[left] == '+')
     {
         left++;
@@ -31,6 +30,7 @@ bool isNumber(string s) {
     {
         return false;
     }
+
     //如果第一个字符或者最后一个字符为e或者E肯定不是数字
     if(s[left] == 'e'||s[left] == 'E'||s[right] == 'e'||s[right] == 'E')
     {
@@ -64,7 +64,7 @@ bool isNumber(string s) {
             }
             if((i+1 < right &&i == left&& (s[i+1] == 'e'||s[i+1] == 'E'))||(i-1>left && i == right&&(s[i-1] == 'e'||s[i-1] == 'E')))
             {
-                return false;                
+                return false;
             }
             pointCount++;
         }
@@ -72,7 +72,7 @@ bool isNumber(string s) {
         {
             return false;
         }
-        if(pointCount > 1 || eCount > 1)
+        if(pointCount > 1|| eCount > 1)
         {
             return false;
         }
