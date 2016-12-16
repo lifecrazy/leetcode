@@ -37,6 +37,7 @@ bool isNumber(string s) {
         return false;
     }
     int pointCount = 0 ;
+	//如果.出现在e的后边为不合法的数字，ePos记录e的位置，在.处进行判断
     int ePos = -1;
     int eCount = 0;
     for(int i = left; i <= right; i++)
