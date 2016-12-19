@@ -22,7 +22,8 @@ int hammingDistance(int x, int y) {
     }
     return result;
 }
-int totalHammingDistance(vector<int>& nums) {
+//方法一超时
+int totalHammingDistance_1(vector<int>& nums) {
     int result = 0 ;
     for(int i = 0 ; i < nums.size(); i++)
     {
@@ -30,6 +31,29 @@ int totalHammingDistance(vector<int>& nums) {
         {
             result += hammingDistance(nums[i],nums[j]);
         }
+    }
+    return result;
+}
+//方法二:
+int totalHammingDistance(vector<int>& nums) {
+    int result = 0;
+    for(int k = 0 ; k < 32;k++)
+    {
+        int x = 0;
+        int y = 0;
+        for(int i = 0 ; i < nums.size();i++)
+        {
+            int tmp = nums[i] >> k & 0x1;
+            if(tmp == 0)
+            {
+                x++;
+            }
+            else
+            {
+                y++;
+            }
+        }
+        result += x * y;
     }
     return result;
 }
