@@ -7,7 +7,6 @@
 
 #include<iostream>
 #include<vector>
-#include<map>
 #include<string>
 using namespace std;
 
@@ -17,14 +16,17 @@ vector<int> findSubstring(string s, vector<string>& words) {
     {
         return result;
     }
-    map<string,int> words_map;
+    if(s.size() < words.size() * words[0].size())
+    {
+        return result;
+    }
+    vector<pair<string,int> > words_map;
     for(int i = 0 ; i < words.size();i++)
     {
-        words_map.insert(make_pair(words[i],0));
+        words_map.push_back(make_pair(words[i],0));
     }
-    map<string,int>::iterator iter;
     int wordlen = words[0].size();
-    for(int i = 0 ; i < s.size() - wordlen * words.size(); i++)
+    for(int i = 0 ; i <= s.size() - wordlen * words.size(); i++)
     {
         //按照wordlen的大小截取words.size()个字符串进行比较
         //如果能够覆盖整个words数组则符合要求
@@ -36,12 +38,12 @@ vector<int> findSubstring(string s, vector<string>& words) {
         {
             flag = 0;
             temp = s.substr(i + j * wordlen,wordlen);
-            for(iter = words_map.begin();iter != words_map.end();iter++)
+            for(int k = 0; k < words_map.size(); k++)
             {
-                if(temp == iter->first && iter->second == 0)
+                if(temp == words_map[k].first && words_map[k].second == 0)
                 {
                     flag = 1;
-                    iter->second = 1;
+                    words_map[k].second = 1;
                     break;
                 }
             }
@@ -53,33 +55,46 @@ vector<int> findSubstring(string s, vector<string>& words) {
         }
         if(j == words.size())
         {
-            for(iter = words_map.begin();iter != words_map.end();iter++)
+            int k = 0;
+            for(; k < words_map.size();k++)
             {
-                if(iter->second != 1)
+                if(words_map[k].second != 1)
                 {
                     break;
                 }
             }
-            if(iter == words_map.end())
+            if(k == words_map.size())
             {
                 result.push_back(i);
-                i += words.size() * wordlen;
+                i +=  wordlen;
                 i--;
             }
         }
-        for(iter = words_map.begin();iter != words_map.end();iter++)
+        else if(j != 0)
         {
-            iter->second = 0;
+            i += wordlen;
+            i--;
+        }
+        for(int k = 0 ;k < words_map.size(); k++)
+        {
+            words_map[k].second = 0;
         }
     }
     return result;
 }
 int main()
 {
-    string s = "barfoothefoobarman";
+    //string s = "barfoothefoobarman";
+    //string s = "barfoofoobarthefoobarman";
+    string s = "wordgoodgoodgoodbestword";
     vector<string> words;
-    words.push_back("foo");
+    /*words.push_back("foo");
     words.push_back("bar");
+    words.push_back("the");*/
+    words.push_back("word");
+    words.push_back("good");
+    words.push_back("best");
+    words.push_back("good");
     vector<int> result = findSubstring(s,words);
     for(int i = 0 ;i < result.size(); i++)
     {
