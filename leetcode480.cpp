@@ -9,39 +9,7 @@
 #include<vector>
 using namespace std;
 
-/*int findk(vector<int>& nums,int left,int right, int pos)
-{
-    int cur = nums[left];
-    int i = left + 1;
-    int j = right;
-    while(i <= j)
-    {
-        while(nums[i] > cur) i++;
-        while(nums[j] < cur) j--;
-        if(i < j)
-        {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-        }
-    }
-    int temp = nums[left];
-    nums[left] = nums[j];
-    nums[j] = temp;
-    int len = j - left + 1;
-    if(len == pos)
-    {
-        return nums[j];
-    }
-    else if(len > pos)
-    {
-        return findk(nums,left, j - 1,pos);
-    }
-    else
-    {
-        return findk(nums,j + 1,right,pos -len);
-    }
-}*/
+//方法一采用快排的方法  超时了
 int partition(vector<int>& nums, int left,int right)
 {
     int temp = nums[left];
@@ -78,7 +46,7 @@ void quickSort(vector<int>& nums ,int left ,int right)
         quickSort(nums,index + 1, right);
     }
 }
-vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+vector<double> medianSlidingWindow_2(vector<int>& nums, int k) {
     vector<int> arr_tmp(k,0);
     vector<double> result;
     for(int i = 0; i <= nums.size() - k; i++)
@@ -99,6 +67,47 @@ vector<double> medianSlidingWindow(vector<int>& nums, int k) {
     }
     return result;
 }
+//方法二
+int findK(vector<int>& nums,int k)
+{
+    int start = 0;
+    int end = nums.size() - 1;
+    int index = partition(nums,start,end);
+    while(index != k -1)
+    {
+        if(index > k -1)
+        {
+            end = index -1;
+            index = partition(nums,start,end);
+        }
+        else
+        {
+            start = index + 1;
+            index = partition(nums,start,end);
+        }
+    }
+    return nums[k];
+}
+vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+    vector<int> arr_tmp(k,0);
+    vector<double> result;
+    for(int i = 0; i <= nums.size() - k; i++)
+    {
+        for(int j = 0 ;j < k;j++)
+        {
+            arr_tmp[j] = nums[i + j];
+        }
+        if(k % 2 ==1)
+        {
+            result.push_back((double)findK(arr_tmp,k / 2));
+        }
+        else
+        {
+            result.push_back(((double)findK(arr_tmp,k / 2) + findK(arr_tmp,k/2 -1)) / 2);
+        }
+    }
+    return result;
+}
 int main()
 {
     vector<int> nums;
@@ -110,7 +119,6 @@ int main()
     nums.push_back(3);
     nums.push_back(6);
     nums.push_back(7);
-    //quickSort(nums , 0 , nums.size() - 1);
     for(int i = 0 ; i < nums.size();i++)
     {
         cout << nums[i] << '\t';
@@ -122,4 +130,10 @@ int main()
         cout << result[i] << '\t';
     }
     cout << endl;
+    /*cout << findK(nums,nums.size()/2)<< endl;
+    for(int i = 0 ; i < nums.size();i++)
+    {
+        cout << nums[i] << '\t';
+    }
+    cout << endl;*/
 }
