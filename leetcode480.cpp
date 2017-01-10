@@ -68,25 +68,28 @@ vector<double> medianSlidingWindow_2(vector<int>& nums, int k) {
     return result;
 }
 //方法二
-int findK(vector<int>& nums,int k)
+int findK(vector<int>& nums,int left,int right,int k)
 {
-    int start = 0;
-    int end = nums.size() - 1;
-    int index = partition(nums,start,end);
-    while(index != k -1)
+    if(left >= right)
     {
-        if(index > k -1)
+        return nums[left];
+    }
+    else
+    {
+        int index = partition(nums,left,right);
+        if(index > k)
         {
-            end = index -1;
-            index = partition(nums,start,end);
+            findK(nums,left,index - 1,k);
+        }
+        else if(index < k)
+        {
+            findK(nums,index + 1,right,k);
         }
         else
         {
-            start = index + 1;
-            index = partition(nums,start,end);
+            return nums[index];
         }
     }
-    return nums[k];
 }
 vector<double> medianSlidingWindow(vector<int>& nums, int k) {
     vector<int> arr_tmp(k,0);
@@ -99,11 +102,11 @@ vector<double> medianSlidingWindow(vector<int>& nums, int k) {
         }
         if(k % 2 ==1)
         {
-            result.push_back((double)findK(arr_tmp,k / 2));
+            result.push_back((double)findK(arr_tmp,0,k-1,k / 2));
         }
         else
         {
-            result.push_back(((double)findK(arr_tmp,k / 2) + findK(arr_tmp,k/2 -1)) / 2);
+            result.push_back(((double)findK(arr_tmp,0,k-1,k / 2) + findK(arr_tmp,0,k-1,k/2 -1)) / 2);
         }
     }
     return result;
