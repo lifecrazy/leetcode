@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<vector>
+#include<cassert>
 using namespace std;
 
 //方法一采用快排的方法  超时了
@@ -70,7 +71,7 @@ vector<double> medianSlidingWindow_2(vector<int>& nums, int k) {
 //方法二
 int findK(vector<int>& nums,int left,int right,int k)
 {
-    if(left >= right)
+/*    if(left >= right)
     {
         return nums[left];
     }
@@ -89,7 +90,38 @@ int findK(vector<int>& nums,int left,int right,int k)
         {
             return nums[index];
         }
+    }*/
+    if(nums.size() <= 0)
+    {
+        return -1;
     }
+    int index = -1 ;
+    while(index != k)
+    {
+        index = partition(nums, left, right);
+        if(index < k)
+        {
+            left = index + 1;
+        }
+        else if(index > k)
+        {
+            right = index - 1;
+        }
+        else
+        {
+            break;
+        }
+    }
+    assert(index == k);
+    return nums[index];
+   /* if(index == k)
+    {
+        return nums[index];
+    }
+    else
+    {
+        return -1;
+    }*/
 }
 vector<double> medianSlidingWindow(vector<int>& nums, int k) {
     vector<int> arr_tmp(k,0);
@@ -102,7 +134,7 @@ vector<double> medianSlidingWindow(vector<int>& nums, int k) {
         }
         if(k % 2 ==1)
         {
-            result.push_back((double)findK(arr_tmp,0,k-1,k / 2));
+            result.push_back((double) findK(arr_tmp,0,k-1,k / 2));
         }
         else
         {
@@ -122,6 +154,7 @@ int main()
     nums.push_back(3);
     nums.push_back(6);
     nums.push_back(7);
+   // cout <<nums[ findK(nums,0,nums.size() - 1, 5)]<<endl;
     for(int i = 0 ; i < nums.size();i++)
     {
         cout << nums[i] << '\t';
