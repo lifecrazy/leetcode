@@ -9,11 +9,8 @@
 #include<vector>
 using namespace std;
 int findMaxConsecutiveOnes(vector<int>& nums) {
-    int max = 0 ;
+    vector<int> countArr;
     int count = 0;
-    int zeroCount = 0;
-    int zeroIndex = 0;
-    int lastIndex = 0;
     for(int i = 0 ; i < nums.size();i++)
     {
         if(nums[i] == 1)
@@ -22,33 +19,29 @@ int findMaxConsecutiveOnes(vector<int>& nums) {
         }
         else
         {
-            zeroCount++;
-            zeroIndex = i;
-        }
-        //1.没有0全部是1 count 不需要回0
-        //2.存在一个0 剩下的全部是1 count 不需要回0
-        //3.存在多个零， count和zeroCount需要回0重新计数
-        if(zeroCount == 0 && count > max)
-        {
-            max = count;
-        }
-        else if(zeroCount == 1 && (count +zeroCount )> max)
-        {
-            lastIndex = zeroIndex;
-            max = count + zeroCount;
-        }
-        else
-        {
-            int len = i - lastIndex;
-            if(count + 1 > max)
-            {
-                max = count + 1;
-            }
-            count = len - 1;
-            zeroCount = 1;
+            countArr.push_back(count);
+            count = 0;
         }
     }
-    return max ;
+    countArr.push_back(count);
+    int max = 0 ;
+    cout << countArr.size()<<endl;
+    if(countArr.size() == 1 || countArr.size() == 2)
+    {
+        max = nums.size();
+    }
+    else
+    {
+        for(int i = 1 ; i <countArr.size();i++)
+        {
+            cout << countArr[i - 1] << "*******" << countArr[i] <<endl;
+            if(countArr[i - 1] + 1 + countArr[i] > max)
+            {
+                max = countArr[i - 1] + 1 + countArr[i];
+            }
+        }
+    }
+    return max;
 }
 int main()
 {
