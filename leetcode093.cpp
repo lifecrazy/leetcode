@@ -44,7 +44,6 @@ vector<string> restoreIpAddresses(string s) {
 			}
 		}
 	}
-
 	return result;
 }
 
