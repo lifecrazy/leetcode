@@ -24,6 +24,7 @@ int countSegments(string s) {
 	}
 	for (; i < s.size(); i++)
 	{
+		//前一个是空格下一个不是空格的时候计数一次	
 		if (i + 1 < s.size() && s[i] == ' '&& s[i + 1] != ' ')
 		{
 			result++;
