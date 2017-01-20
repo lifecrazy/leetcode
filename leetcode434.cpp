@@ -10,13 +10,26 @@
 using namespace std;
 
 int countSegments(string s) {
-    int result = 1;
-    string::size_type i = 0;
-    while(string::npos !=(i = s.find(' ',i+1)))
-    {
-        result++;
-    }
-    return result;
+   int result = 1;
+	int i = 0;
+	//去除最左端的空格
+	while (s[i] == ' ')
+	{
+		i++;
+	}
+	//全是空格的处理
+	if (i >= s.size())
+	{
+		return 0;
+	}
+	for (; i < s.size(); i++)
+	{
+		if (i + 1 < s.size() && s[i] == ' '&& s[i + 1] != ' ')
+		{
+			result++;
+		}
+	}
+	return result;
 }
 int main()
 {
