@@ -62,12 +62,6 @@ string findLongestWord(string s, vector<string>& d) {
 }
 int main()
 {
-	//TreeNode* root = new TreeNode(1);
-	//TreeNode* first = new TreeNode(5);
-	//TreeNode* sec = new TreeNode(3);
-	//root->right = sec;
-	//first->left = first;
-	//cout << getMinimumDifference(root) << endl;
 	/*"abpcplea"
 ["ale","apple","monkey","plea"]*/
 	//string s = "abpcplea";
