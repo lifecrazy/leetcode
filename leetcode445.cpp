@@ -12,7 +12,93 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
+ListNode *ReverseList(ListNode *head)
+{
+    ListNode *cur = head;
+    ListNode *pre = nullptr;
+    while (cur != nullptr)
+    {
+        ListNode *next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        if (next == nullptr)
+        {
+            return cur;
+        }
+        cur = next;
+    }
 
+    return head;
+}
+ListNode *addInList(ListNode *head1, ListNode *head2)
+{
+    int len1 = 0;
+    int len2 = 0;
+    ListNode *p = head1;
+    while (p != NULL)
+    {
+        p = p->next;
+        len1++;
+    }
+    p = head2;
+    while (p != NULL)
+    {
+        p = p->next;
+        len2++;
+    }
+    ListNode *p1 = ReverseList(head1);
+    ListNode *p2 = ReverseList(head2);
+    ListNode *res = new ListNode(-1);
+    ListNode *cur = nullptr;
+    if (len1 > len2)
+    {
+        res->next = p1;
+        cur = p1;
+    }
+    else
+    {
+        res->next = p2;
+        cur = p2;
+    }
+    while (p1 != nullptr && p2 != nullptr)
+    {
+        int tmp = p1->val + p2->val;
+        cur->val = tmp % 10;
+        if (cur->next != nullptr)
+        {
+            cur->next->val += tmp / 10;
+        }
+        else
+        {
+            if (tmp > 9)
+            {
+                ListNode *pTmp = new ListNode(tmp / 10);
+                cur->next = pTmp;
+            }
+        }
+        cur = cur->next;
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+
+    while (cur != nullptr && cur->val > 9)
+    {
+        int tmp = cur->val;
+        cur->val = tmp % 10;
+        if (cur->next != nullptr)
+        {
+            cur->next->val += tmp / 10;
+        }
+        else
+        {
+            ListNode *pTmp = new ListNode(tmp / 10);
+            cur->next = pTmp;
+            break;
+        }
+        cur = cur->next;
+    }
+    return ReverseList(res->next);
+}
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode result(-1);
     int len1 = 0;
