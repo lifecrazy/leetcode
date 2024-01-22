@@ -13,8 +13,37 @@ struct ListNode {
 	ListNode *next;
 	ListNode(int x) : val(x), next(NULL) {}
 };
+    ListNode* deleteDuplicatessec(ListNode* head) {
+        if (!head || !head->next) {
+            return head;
+        }
+        ListNode* first = head->next;
+        ListNode* sec = head;
+        ListNode* pre = nullptr;
+        while (first) {
+            if (first->val == sec->val) {
+                do {
+                    first = first->next;
+                } while (first && sec->val == first->val);
+                if (pre) {
+                    pre->next = first;
+                } else {
+                    head = first;
+                }
+                sec = first;
+                if (first) {
+                    first = first->next;
+                }
+            } else {
+                first = first->next;
+                pre = sec;
+                sec = sec->next;
+            }
+        }
+        return head;
+    }
 ListNode* deleteDuplicates(ListNode* head) {
-    //只有一个节点或者没有节点的情况
+    //鍙湁涓�涓妭鐐规垨鑰呮病鏈夎妭鐐圭殑鎯呭喌
 	if (head == NULL || head->next == NULL)
 	{
 		return head;
